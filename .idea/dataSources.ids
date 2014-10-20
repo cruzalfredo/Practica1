@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @localhost" uuid="463826dc-50b0-4e6c-aad8-4c1f8cf7b466">
+    <database-info product="MySQL" version="5.6.16" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.31 ( Revision: alexander.soklakov@oracle.com-20140520065950-groqzzbvxprqdmnz )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="ejercicio1"/>
+    <table name="alumnogrupo" schema="" catalog="ejercicio1" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ID_Grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_Alumno" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="IDAlumno" columns="ID_Alumno" ref-table="usuario" ref-schema="" ref-catalog="ejercicio1" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="IDGrupo" columns="ID_Grupo" ref-table="grupo" ref-schema="" ref-catalog="ejercicio1" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="IDAlumno" unique="false" columns="ID_Alumno"/>
+      <index name="IDGrupo" unique="false" columns="ID_Grupo"/>
+    </table>
+    <table name="grupo" schema="" catalog="ejercicio1" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Avatar" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Orden" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Estatus" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="IDGrupo" table="alumnogrupo" schema="" catalog="ejercicio1" columns="ID_Grupo"/>
+      <exported-key name="IDsGrupos" table="materiagrupo" schema="" catalog="ejercicio1" columns="ID_Grupo"/>
+    </table>
+    <table name="materia" schema="" catalog="ejercicio1" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Materia" sqlType="VARCHAR" precision="90" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Estatus" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Avatar" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Orden" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="IDsMaterias" table="materiagrupo" schema="" catalog="ejercicio1" columns="ID_Materia"/>
+      <exported-key name="MateriaMaestro_ibfk_1" table="materiamaestro" schema="" catalog="ejercicio1" columns="ID_Materia"/>
+      <index name="unique_ID" unique="true" columns="ID"/>
+    </table>
+    <table name="materiagrupo" schema="" catalog="ejercicio1" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ID_Grupo" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ID_Materia" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="IDsGrupos" columns="ID_Grupo" ref-table="grupo" ref-schema="" ref-catalog="ejercicio1" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="IDsMaterias" columns="ID_Materia" ref-table="materia" ref-schema="" ref-catalog="ejercicio1" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="IDsGrupos" unique="false" columns="ID_Grupo"/>
+      <index name="IDsMaterias" unique="false" columns="ID_Materia"/>
+    </table>
+    <table name="materiamaestro" schema="" catalog="ejercicio1" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ID_Materia" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ID_Maestro" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="MateriaMaestro_ibfk_1" columns="ID_Materia" ref-table="materia" ref-schema="" ref-catalog="ejercicio1" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="MateriaMaestro_ibfk_2" columns="ID_Maestro" ref-table="usuario" ref-schema="" ref-catalog="ejercicio1" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="usuario" schema="" catalog="ejercicio1" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ApellidoPaterno" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ApellidoMaterno" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Telefono" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Calle" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NumeroExterior" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NumeroInterior" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Colonia" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Municipio" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Estado" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CP" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Correo" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Usuario" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Contrasena" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Nivel" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Estatus" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="IDAlumno" table="alumnogrupo" schema="" catalog="ejercicio1" columns="ID_Alumno"/>
+      <exported-key name="MateriaMaestro_ibfk_2" table="materiamaestro" schema="" catalog="ejercicio1" columns="ID_Maestro"/>
+    </table>
+  </data-source>
+</component>
